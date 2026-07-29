@@ -1,14 +1,14 @@
 // src/middlewares/checkRoleAdminMiddleware.ts
 import { type Request, type Response, type NextFunction } from "express";
-import { type CustomRequest, type User } from "../libs/types.js";
-import { users } from "../db/db.js";
+import { type CustomRequest, type User } from "../libs/types.ts";
+import { users } from "../db/db.ts";
 
 // interface CustomRequest extends Request {
 //   user?: any; // Define the user property
 //   token?: string; // Define the token property
 // }
 
-export const checkRoleAdmin = (
+export const checkRole = (
   req: CustomRequest,
   res: Response,
   next: NextFunction,
@@ -19,7 +19,7 @@ export const checkRoleAdmin = (
 
   // 2. check if user exists (search with username) and role is ADMIN
   const user = users.find((u: User) => u.username === payload?.username);
-  if (!user || user.role !== "ADMIN") {
+  if (!user || (user.role !== "ADMIN" && user.role !== "STUDENT")) {
     return res.status(401).json({
       success: false,
       message: "Unauthorized user",

@@ -2,15 +2,14 @@ import express, { type Request, type Response } from "express";
 
 // import middlewares
 import morgan from "morgan";
-import invalidJsonMiddleware from "./middlewares/invalidJsonMiddleware.js";
-import notFoundMiddleware from "./middlewares/notFoundMiddleware.js";
+import invalidJsonMiddleware from "./middlewares/invalidJsonMiddleware.ts";
+import notFoundMiddleware from "./middlewares/notFoundMiddleware.ts";
 
 // import routes
-import studentRouter_v2 from "./routes/studentsRoutes_v2.js";
-import studentRouter_v3 from "./routes/studentsRoutes_v3.js";
-import courseRouter_v2 from "./routes/coursesRouters_v2.js";
-import userRouter_v2 from "./routes/userRouters.js";
-import enrollment from "./routes/enrollmentRouters.js";
+import studentRouter_v2 from "./routes/studentsRoutes_v2.ts";
+import studentRouter_v3 from "./routes/studentsRoutes_v3.ts";
+import courseRouter_v2 from "./routes/coursesRouters_v2.ts";
+import enrollmentsRouter_v2 from "./routes/enrollmentRouters_v2.ts";
 
 const app = express();
 const port = 3000;
@@ -20,37 +19,36 @@ app.use(express.json());
 
 // logger middleware
 app.use(morgan("dev"));
+// app.use(morgan("combined"));
 
 // JSON parser middleware
 app.use(invalidJsonMiddleware);
 
-// Base Endpoints
+// Endpoints
 app.get("/", (req: Request, res: Response) => {
   res.send("Lecture09 API services");
 });
+
+app.use("/api/v2/enrollments", enrollmentsRouter_v2);
+app.use("/api/v2/students", studentRouter_v2);
+app.use("/api/v3/students", studentRouter_v3);
+app.use("/api/v2/courses", courseRouter_v2);
 
 app.get("/api/me", (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "Student Information",
     data: {
-      studentId: "680610697",
+      studentId: 680610697,
       firstName: "Pobphut",
-      lastName: "kungwong",
+      lastName: "Kungwong",
       program: "CPE",
       section: "001",
     },
-  });
+  })
 });
 
-// API Routes
-app.use("/api/v2/students", studentRouter_v2);
-app.use("/api/v3/students", studentRouter_v3);
-app.use("/api/v2/courses", courseRouter_v2);
-app.use("/api/v2/users", userRouter_v2);
-app.use("/api/v2/enrollments", enrollment);
-
-// 404 Not Found middleware (วางไว้ท้ายสุดเสมอ)
+// endpoint check middleware
 app.use(notFoundMiddleware);
 
 app.listen(port, () => {
