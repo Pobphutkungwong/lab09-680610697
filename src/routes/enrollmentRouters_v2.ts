@@ -10,7 +10,7 @@ import {
   zStudentId,
   zCourseId,
   zEnrollmentBody,
-} from "../libs/zodValidators.js";
+} from "../libs/zodValidators.ts";
 
 // import database
 import {
