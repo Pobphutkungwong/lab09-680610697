@@ -9,7 +9,7 @@ import notFoundMiddleware from "./middlewares/notFoundMiddleware.ts";
 import studentRouter_v2 from "./routes/studentsRoutes_v2.ts";
 import studentRouter_v3 from "./routes/studentsRoutes_v3.ts";
 import courseRouter_v2 from "./routes/coursesRouters_v2.ts";
-import enrollmentsRouter_v2 from "./routes/enrollmentRouters_v2.ts";
+import enrollmentsRouter_v2 from "./routes/enrollmentsRouters_v2.js";
 
 const app = express();
 const port = 3000;

@@ -42,7 +42,7 @@ router.get("/:courseId", (req: Request, res: Response) => {
     }
 
     const foundIndex = courses.findIndex(
-      (c: Course) => c.courseId === courseId
+      (c: Course) => c.courseId === courseId,
     );
 
     if (foundIndex === -1) {
