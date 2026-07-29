@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc && tsc-alias",
@@ -11,17 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.17.0",
-      "onFail": "download"
-    }
-  },
   "type": "module",
   "dependencies": {
     "bcrypt": "^6.0.0",
-    "builds": "^0.0.2",
     "cors": "^2.8.6",
     "debug": "^4.4.3",
     "dotenv": "^17.4.2",
